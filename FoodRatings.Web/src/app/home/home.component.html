@@ -1,0 +1,48 @@
+<ngx-loading [show]="loading"></ngx-loading>
+<div class="container">
+  <div class="well">
+    <div class="well-block">
+      <div class="row errorMessage">
+        <p class="alert alert-danger" role="alert" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </p>
+      </div>
+
+      <div class=row>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+          <div>
+            <h1>Food Hygiene Ratings</h1>
+            <select class="form-control custom-select" id="body" [(ngModel)]="selectedAuthotityId" (change)="onSelect()">
+              <option [ngValue]="0">Please select Authority</option>
+              <option *ngFor="let authority of authorities" [value]="authority.localAuthorityId">{{authority.name}}</option>
+            </select>
+          </div>
+
+          <div *ngIf="hasResults">
+            <h2>Results</h2>
+            <table class="table table-condensed table-hover vehicle-table">
+              <thead>
+                <tr>
+                  <th>Rating</th>
+                  <th>Percentage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let authority of authorityResults">
+                  <td>
+                    {{authority.score}}{{authority.score.length == 1 ? "-star" : ""}}
+                  </td>
+                  <td>
+                    {{authority.procentage}}%
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
